@@ -2,33 +2,37 @@ import React from 'react';
 import { SimulationProvider } from './context/SimulationContext';
 import Layout from './components/Layout';
 import ParkingVisualization from './components/ParkingVisualization';
-import ControlPanel from './components/ControlPanel';
 import CameraView from './components/CameraView';
+import ControlPanel from './components/ControlPanel';
 import NotificationPanel from './components/NotificationPanel';
 import StatisticsPanel from './components/StatisticsPanel';
 import ActionPlan from './components/ActionPlan';
+import ProcessVisualization from './components/ProcessVisualization';
 
-const App: React.FC = () => {
+function App() {
   return (
     <SimulationProvider>
       <Layout>
-        <div className="flex flex-col lg:flex-row w-full h-full gap-4">
-          <div className="flex flex-col w-full lg:w-3/4 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2 space-y-6">
             <ParkingVisualization />
-            <div className="flex flex-col md:flex-row gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <CameraView />
-              <StatisticsPanel />
+              <div className="space-y-6">
+                <ControlPanel />
+                <ActionPlan />
+              </div>
             </div>
+            <ProcessVisualization />
           </div>
-          <div className="flex flex-col w-full lg:w-1/4 gap-4">
-            <ControlPanel />
+          <div className="space-y-6">
             <NotificationPanel />
-            <ActionPlan />
+            <StatisticsPanel />
           </div>
         </div>
       </Layout>
     </SimulationProvider>
   );
-};
+}
 
 export default App;

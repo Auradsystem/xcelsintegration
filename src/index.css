@@ -2,14 +2,168 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  html {
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #0f172a;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+/* Custom animations */
+@keyframes flame-1 {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-10px) scaleY(1.1); }
+}
+
+@keyframes flame-2 {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-15px) scaleY(1.2); }
+}
+
+@keyframes flame-3 {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-8px) scaleY(1.05); }
+}
+
+@keyframes spark {
+  0% { transform: translate(0, 0); opacity: 1; }
+  100% { transform: translate(var(--spark-x, 20px), var(--spark-y, -30px)); opacity: 0; }
+}
+
+.animate-flame-1 {
+  animation: flame-1 2s ease-in-out infinite;
+}
+
+.animate-flame-2 {
+  animation: flame-2 1.5s ease-in-out infinite;
+}
+
+.animate-flame-3 {
+  animation: flame-3 2.5s ease-in-out infinite;
+}
+
+.animate-spark {
+  --spark-x: 0px;
+  --spark-y: 0px;
+  animation: spark 1s ease-out forwards;
+}
+
+/* Scrollbar styling */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: #1e293b;
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: #475569;
+  border-radius: 3px;
+}
+
+/* Glassmorphism effects */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Gradient animations */
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(45deg, #e11d48, #3b82f6, #10b981);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: border-rotate 4s linear infinite;
+}
+
+@keyframes border-rotate {
+  0% {
+    background-position: 0% 50%;
   }
-  
-  body {
-    @apply bg-gray-900;
+  50% {
+    background-position: 100% 50%;
   }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Glow effects */
+.glow-text {
+  text-shadow: 0 0 10px currentColor;
+}
+
+.glow-icon {
+  filter: drop-shadow(0 0 5px currentColor);
+}
+
+/* Data flow animation */
+.data-flow {
+  position: relative;
+  overflow: hidden;
+}
+
+.data-flow::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  animation: data-flow 2s infinite;
+}
+
+@keyframes data-flow {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Pulse animation with different timing */
+.pulse-slow {
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 @keyframes pulse {
@@ -21,83 +175,43 @@
   }
 }
 
-.animate-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+/* 3D button effect */
+.button-3d {
+  transform: translateY(0);
+  box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.3);
+  transition: transform 0.1s, box-shadow 0.1s;
 }
 
-@keyframes flame-1 {
-  0%, 100% {
-    height: 32px;
-    opacity: 0.8;
-  }
-  50% {
-    height: 38px;
-    opacity: 0.9;
-  }
+.button-3d:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
 }
 
-@keyframes flame-2 {
-  0%, 100% {
-    height: 40px;
-    opacity: 0.9;
-  }
-  50% {
-    height: 48px;
-    opacity: 1;
-  }
+/* Hover effects */
+.hover-scale {
+  transition: transform 0.2s ease;
 }
 
-@keyframes flame-3 {
-  0%, 100% {
-    height: 28px;
-    opacity: 0.8;
-  }
-  50% {
-    height: 34px;
-    opacity: 0.9;
-  }
+.hover-scale:hover {
+  transform: scale(1.05);
 }
 
-@keyframes spark {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-40px) scale(0);
+/* Notification badge animation */
+@keyframes notification-ping {
+  75%, 100% {
+    transform: scale(1.5);
     opacity: 0;
   }
 }
 
-.animate-flame-1 {
-  animation: flame-1 1.5s ease-in-out infinite;
-}
-
-.animate-flame-2 {
-  animation: flame-2 2s ease-in-out infinite;
-}
-
-.animate-flame-3 {
-  animation: flame-3 1.8s ease-in-out infinite;
-}
-
-.animate-spark {
-  animation: spark var(--duration, 2s) ease-out forwards;
-}
-
-/* Custom scrollbar */
-.scrollbar-thin::-webkit-scrollbar {
+.notification-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
   width: 6px;
-}
-
-.scrollbar-thin::-webkit-scrollbar-track {
-  @apply bg-gray-900;
-}
-
-.scrollbar-thin::-webkit-scrollbar-thumb {
-  @apply bg-gray-700 rounded-full;
-}
-
-.scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-600;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #e11d48;
+  animation: notification-ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
 }

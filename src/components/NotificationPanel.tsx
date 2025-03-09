@@ -20,7 +20,7 @@ const NotificationPanel: React.FC = () => {
       case 'warning':
         return <AlertTriangle className="h-5 w-5 text-amber-500" />;
       case 'error':
-        return <AlertCircle className="h-5 w-5 text-red-600" />;
+        return <AlertCircle className="h-5 w-5 text-red-600 glow-icon" />;
       case 'success':
         return <CheckCircle className="h-5 w-5 text-green-500" />;
       default:
@@ -29,13 +29,13 @@ const NotificationPanel: React.FC = () => {
   };
   
   return (
-    <div className="bg-gray-800 rounded-lg shadow-md p-4 border border-gray-700">
+    <div className="bg-gray-800 rounded-lg shadow-md p-4 border border-gray-700 hover-scale">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-semibold text-white flex items-center">
           <Bell className="h-5 w-5 mr-2 text-red-600" />
           Notifications
         </h2>
-        <span className="bg-gray-900 text-red-600 text-xs font-medium px-2.5 py-0.5 rounded-full border border-red-900">
+        <span className="bg-gray-900 text-red-600 text-xs font-medium px-2.5 py-0.5 rounded-full border border-red-900 gradient-border">
           {notifications.length}
         </span>
       </div>
@@ -61,7 +61,7 @@ const NotificationPanel: React.FC = () => {
                     : notification.level === 'error'
                     ? 'border-red-600'
                     : 'border-green-500'
-                }`}
+                } hover-scale`}
               >
                 <div className="flex">
                   <div className="flex-shrink-0 mr-3">
@@ -69,7 +69,7 @@ const NotificationPanel: React.FC = () => {
                   </div>
                   <div className="flex-1">
                     <div className="flex justify-between items-start">
-                      <h3 className={`text-sm font-medium ${notification.read ? 'text-gray-400' : 'text-white'}`}>
+                      <h3 className={`text-sm font-medium ${notification.read ? 'text-gray-400' : notification.level === 'error' ? 'text-red-500 glow-text' : 'text-white'}`}>
                         {notification.title}
                       </h3>
                       <span className="text-xs text-gray-500">
@@ -83,7 +83,7 @@ const NotificationPanel: React.FC = () => {
                     {!notification.read && (
                       <div className="mt-2 flex justify-end">
                         <button
-                          className="text-xs text-red-600 hover:text-red-500 flex items-center"
+                          className="text-xs text-red-600 hover:text-red-500 flex items-center button-3d px-2 py-1 bg-gray-800 rounded"
                           onClick={() => acknowledgeNotification(notification.id)}
                         >
                           <CheckCircle className="h-3 w-3 mr-1" />

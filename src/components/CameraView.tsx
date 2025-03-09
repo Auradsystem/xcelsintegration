@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSimulation } from '../context/SimulationContext';
-import { Maximize2, Minimize2, Camera, Video, AlertTriangle, Shield } from 'lucide-react';
+import { Maximize2, Minimize2, Camera, Video, AlertTriangle, Shield, Zap } from 'lucide-react';
 import { SimulationStep } from '../types';
 
 const CameraView: React.FC = () => {
@@ -17,6 +17,7 @@ const CameraView: React.FC = () => {
   const [flameEffect, setFlameEffect] = useState(0);
   const [motionDetected, setMotionDetected] = useState(false);
   const [carFireIntensity, setCarFireIntensity] = useState(0);
+  const [scanLines, setScanLines] = useState(false);
   
   // Increase smoke and flame effects as simulation progresses
   useEffect(() => {
@@ -37,23 +38,29 @@ const CameraView: React.FC = () => {
         setMotionDetected(prev => !prev);
       }, 2000);
       
+      const scanLinesInterval = setInterval(() => {
+        setScanLines(prev => !prev);
+      }, 3000);
+      
       return () => {
         clearInterval(smokeInterval);
         clearInterval(flameInterval);
         clearInterval(carFireInterval);
         clearInterval(motionInterval);
+        clearInterval(scanLinesInterval);
       };
     } else {
       setSmokeEffect(0);
       setFlameEffect(0);
       setCarFireIntensity(0);
       setMotionDetected(false);
+      setScanLines(false);
     }
   }, [simulationActive, simulationStep]);
   
   if (!activeCamera && !simulationActive) {
     return (
-      <div className="bg-gray-800 rounded-lg shadow-md p-4 flex-1 border border-gray-700">
+      <div className="bg-gray-800 rounded-lg shadow-md p-4 flex-1 border border-gray-700 hover-scale">
         <h2 className="text-xl font-semibold text-white mb-4 flex items-center">
           <Camera className="h-5 w-5 mr-2 text-red-600" />
           Surveillance Caméra
@@ -70,7 +77,7 @@ const CameraView: React.FC = () => {
   }
   
   return (
-    <div className={`${showCameraFullscreen ? 'fixed inset-0 z-50 bg-black p-4' : 'bg-gray-800 rounded-lg shadow-md p-4 flex-1 border border-gray-700'}`}>
+    <div className={`${showCameraFullscreen ? 'fixed inset-0 z-50 bg-black p-4' : 'bg-gray-800 rounded-lg shadow-md p-4 flex-1 border border-gray-700 hover-scale'}`}>
       <div className="flex justify-between items-center mb-4">
         <h2 className={`text-xl font-semibold text-white flex items-center`}>
           <Video className="h-5 w-5 mr-2 text-red-600" />
@@ -101,6 +108,17 @@ const CameraView: React.FC = () => {
           alt="Flux caméra"
           className={`w-full ${showCameraFullscreen ? 'h-[calc(100vh-120px)]' : 'h-64'} object-cover`}
         />
+        
+        {/* Scan lines effect */}
+        {scanLines && (
+          <div 
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.1), rgba(0,0,0,0.1) 1px, transparent 1px, transparent 2px)',
+              opacity: 0.3
+            }}
+          ></div>
+        )}
         
         {/* Smoke effect overlay */}
         {smokeEffect > 0 && (
@@ -166,8 +184,10 @@ const CameraView: React.FC = () => {
                     left: `${Math.random() * 100}%`,
                     bottom: `${Math.random() * 50 + 20}%`,
                     animationDelay: `${Math.random() * 2}s`,
-                    animationDuration: `${Math.random() * 2 + 1}s`
-                  }}
+                    animationDuration: `${Math.random() * 2 + 1}s`,
+                    '--spark-x': `${(Math.random() * 40 - 20)}px`,
+                    '--spark-y': `${-Math.random() * 40}px`
+                  } as React.CSSProperties}
                 ></div>
               ))}
             </div>
@@ -177,7 +197,7 @@ const CameraView: React.FC = () => {
         {/* Camera UI overlay */}
         <div className="absolute inset-0 pointer-events-none">
           {/* Top bar */}
-          <div className="absolute top-0 left-0 right-0 p-2 bg-black bg-opacity-70 flex justify-between items-center">
+          <div className="absolute top-0 left-0 right-0 p-2 bg-black bg-opacity-70 flex justify-between items-center backdrop-blur-sm">
             <div className="flex items-center">
               {/* XCELS mini logo */}
               <div className="relative h-5 w-5 mr-2">
@@ -196,7 +216,7 @@ const CameraView: React.FC = () => {
           </div>
           
           {/* Bottom bar */}
-          <div className="absolute bottom-0 left-0 right-0 p-2 bg-black bg-opacity-70">
+          <div className="absolute bottom-0 left-0 right-0 p-2 bg-black bg-opacity-70 backdrop-blur-sm">
             <div className="flex justify-between items-center">
               <div className="flex items-center space-x-3">
                 <div className="flex items-center">
@@ -239,6 +259,12 @@ const CameraView: React.FC = () => {
               <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-red-600 opacity-30"></div>
               <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-red-600 opacity-30"></div>
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 border border-red-600 rounded-full opacity-30"></div>
+              
+              {/* Targeting elements */}
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <div className="w-32 h-32 border-2 border-red-600 border-dashed rounded-full opacity-20 animate-pulse"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 border-2 border-red-600 rounded-full"></div>
+              </div>
             </>
           )}
         </div>
@@ -246,10 +272,10 @@ const CameraView: React.FC = () => {
         {/* Alert overlay when alarm confirmed */}
         {simulationStep === SimulationStep.ALARM_CONFIRMED && (
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="bg-black bg-opacity-80 border-2 border-red-600 text-white px-6 py-4 rounded-md animate-pulse">
+            <div className="bg-black bg-opacity-80 border-2 border-red-600 text-white px-6 py-4 rounded-md animate-pulse glass-panel">
               <div className="flex items-center justify-center mb-2">
-                <AlertTriangle className="h-6 w-6 text-red-600 mr-2" />
-                <h3 className="text-xl font-bold text-red-600">ALARME INCENDIE</h3>
+                <AlertTriangle className="h-6 w-6 text-red-600 mr-2 glow-icon" />
+                <h3 className="text-xl font-bold text-red-600 glow-text">ALARME INCENDIE</h3>
               </div>
               <p className="text-center">Zone {activeCamera?.zone}</p>
               <p className="text-center text-sm mt-1">INTERVENTION INITIÉE</p>
@@ -269,10 +295,10 @@ const CameraView: React.FC = () => {
         </div>
         
         {simulationStep >= SimulationStep.CAMERA_VERIFICATION && (
-          <div className="mt-2 bg-red-900 bg-opacity-30 border border-red-800 rounded p-2">
+          <div className="mt-2 bg-red-900 bg-opacity-30 border border-red-800 rounded p-2 glass-panel">
             <div className="flex items-center text-red-500 font-medium animate-pulse">
-              <AlertTriangle className="h-4 w-4 mr-1" />
-              <span>DÉTECTION: Fumée détectée à l'emplacement {activeDetector?.id.split('-')[1]}</span>
+              <Zap className="h-4 w-4 mr-1 glow-icon" />
+              <span className="glow-text">DÉTECTION: Fumée détectée à l'emplacement {activeDetector?.id.split('-')[1]}</span>
             </div>
           </div>
         )}

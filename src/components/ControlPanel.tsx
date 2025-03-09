@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSimulation } from '../context/SimulationContext';
-import { Flame, RotateCcw, AlertTriangle, Shield, Lock, Bell } from 'lucide-react';
+import { Flame, RotateCcw, AlertTriangle, Shield, Lock, Bell, Activity } from 'lucide-react';
 import { SimulationStep } from '../types';
 
 const ControlPanel: React.FC = () => {
@@ -34,7 +34,7 @@ const ControlPanel: React.FC = () => {
   };
   
   return (
-    <div className="bg-gray-800 rounded-lg shadow-md p-4 border border-gray-700">
+    <div className="bg-gray-800 rounded-lg shadow-md p-4 border border-gray-700 hover-scale">
       <h2 className="text-xl font-semibold text-white mb-4 flex items-center">
         <Shield className="h-5 w-5 mr-2 text-red-600" />
         Panneau de Contrôle
@@ -42,23 +42,23 @@ const ControlPanel: React.FC = () => {
       
       <div className="space-y-4">
         <button
-          className={`w-full py-3 px-4 rounded-md flex items-center justify-center space-x-2 ${
+          className={`w-full py-3 px-4 rounded-md flex items-center justify-center space-x-2 button-3d ${
             simulationActive
               ? 'bg-gray-700 cursor-not-allowed'
-              : 'bg-red-600 hover:bg-red-700 text-white'
+              : 'bg-gradient-to-r from-red-700 to-red-600 hover:from-red-600 hover:to-red-500 text-white'
           }`}
           onClick={startSimulation}
           disabled={simulationActive}
         >
-          <Flame className="h-5 w-5" />
+          <Flame className={`h-5 w-5 ${!simulationActive && 'animate-pulse'}`} />
           <span>Simuler une Détection d'Incendie</span>
         </button>
         
         <button
-          className={`w-full py-3 px-4 rounded-md flex items-center justify-center space-x-2 ${
+          className={`w-full py-3 px-4 rounded-md flex items-center justify-center space-x-2 button-3d ${
             !simulationActive
               ? 'bg-gray-700 cursor-not-allowed'
-              : 'bg-blue-600 hover:bg-blue-700 text-white'
+              : 'bg-gradient-to-r from-blue-700 to-blue-600 hover:from-blue-600 hover:to-blue-500 text-white'
           }`}
           onClick={resetSimulation}
           disabled={!simulationActive}
@@ -73,16 +73,16 @@ const ControlPanel: React.FC = () => {
               <span>Progression</span>
               <span>{getStepProgress()}%</span>
             </div>
-            <div className="w-full bg-gray-700 rounded-full h-2.5">
+            <div className="w-full bg-gray-700 rounded-full h-2.5 overflow-hidden">
               <div
-                className="bg-red-600 h-2.5 rounded-full"
+                className="bg-gradient-to-r from-red-600 via-yellow-500 to-green-500 h-2.5 rounded-full data-flow"
                 style={{ width: `${getStepProgress()}%` }}
               ></div>
             </div>
             
-            <div className="mt-4 p-3 bg-gray-900 rounded-md border border-gray-700">
+            <div className="mt-4 p-3 bg-gray-900 rounded-md border border-gray-700 glass-panel">
               <h3 className="font-medium text-white flex items-center">
-                <AlertTriangle className="h-4 w-4 mr-2 text-red-600" />
+                <Activity className="h-4 w-4 mr-2 text-blue-500" />
                 Statut Actuel
               </h3>
               <p className="text-sm mt-2 text-gray-300">
@@ -129,8 +129,8 @@ const ControlPanel: React.FC = () => {
             {simulationStep >= SimulationStep.ALARM_CONFIRMED && (
               <div className="mt-3 p-3 bg-red-900 bg-opacity-30 rounded-md border border-red-800 animate-pulse">
                 <div className="flex items-center">
-                  <Bell className="h-5 w-5 mr-2 text-red-600" />
-                  <h3 className="font-medium text-red-500">ALERTE D'URGENCE</h3>
+                  <Bell className="h-5 w-5 mr-2 text-red-600 glow-icon" />
+                  <h3 className="font-medium text-red-500 glow-text">ALERTE D'URGENCE</h3>
                 </div>
                 <p className="text-sm mt-2 text-gray-300">
                   Incendie détecté dans la zone {activeDetector?.zone}. L'équipe d'intervention a été notifiée.
@@ -141,7 +141,7 @@ const ControlPanel: React.FC = () => {
         )}
         
         {!simulationActive && (
-          <div className="mt-4 p-3 bg-gray-900 rounded-md border border-gray-700">
+          <div className="mt-4 p-3 bg-gray-900 rounded-md border border-gray-700 glass-panel">
             <div className="flex items-center">
               <Shield className="h-5 w-5 mr-2 text-green-500" />
               <h3 className="font-medium text-white">Système Prêt</h3>
@@ -151,11 +151,11 @@ const ControlPanel: React.FC = () => {
             </p>
             <div className="mt-3 grid grid-cols-2 gap-2 text-xs text-gray-400">
               <div className="flex items-center">
-                <div className="h-2 w-2 bg-green-500 rounded-full mr-1"></div>
+                <div className="h-2 w-2 bg-green-500 rounded-full mr-1 pulse-slow"></div>
                 <span>Détecteurs En Ligne</span>
               </div>
               <div className="flex items-center">
-                <div className="h-2 w-2 bg-green-500 rounded-full mr-1"></div>
+                <div className="h-2 w-2 bg-green-500 rounded-full mr-1 pulse-slow"></div>
                 <span>Caméras Actives</span>
               </div>
             </div>
