@@ -37,7 +37,7 @@ const ControlPanel: React.FC = () => {
     <div className="bg-gray-800 rounded-lg shadow-md p-4 border border-gray-700">
       <h2 className="text-xl font-semibold text-white mb-4 flex items-center">
         <Shield className="h-5 w-5 mr-2 text-red-600" />
-        Panneau de Contrôle XCELS
+        Panneau de Contrôle
       </h2>
       
       <div className="space-y-4">
@@ -90,7 +90,7 @@ const ControlPanel: React.FC = () => {
                 {simulationStep === SimulationStep.DETECTOR_ACTIVATED && 'Détecteur activé'}
                 {simulationStep === SimulationStep.ESSER_PROCESSING && 'Traitement système ESSER'}
                 {simulationStep === SimulationStep.MOXA_TRANSMISSION && 'Transmission MOXA en cours'}
-                {simulationStep === SimulationStep.IVPARK_PROCESSING && 'Traitement système XCELS'}
+                {simulationStep === SimulationStep.IVPARK_PROCESSING && 'Traitement système IVPARK'}
                 {simulationStep === SimulationStep.CAMERA_VERIFICATION && 'Vérification caméra en cours'}
                 {simulationStep === SimulationStep.ALARM_CONFIRMED && 'ALARME CONFIRMÉE - INTERVENTION D\'URGENCE INITIÉE'}
               </p>
@@ -102,7 +102,7 @@ const ControlPanel: React.FC = () => {
                       <Lock className="h-3 w-3 mr-1 text-red-600" />
                       Informations de Sécurité
                     </span>
-                    <span className="text-xs bg-gray-700 px-2 py-0.5 rounded">XCELS-SEC-{Math.floor(Math.random() * 10000).toString().padStart(4, '0')}</span>
+                    <span className="text-xs bg-gray-700 px-2 py-0.5 rounded">SEC-{Math.floor(Math.random() * 10000).toString().padStart(4, '0')}</span>
                   </div>
                   <div className="grid grid-cols-2 gap-2 text-xs">
                     <div>
@@ -147,7 +147,7 @@ const ControlPanel: React.FC = () => {
               <h3 className="font-medium text-white">Système Prêt</h3>
             </div>
             <p className="text-sm mt-2 text-gray-300">
-              Le système de surveillance XCELS Sécurité est actif et prêt. Cliquez sur "Simuler une Détection d'Incendie" pour tester la réponse du système.
+              Le système de surveillance est actif et prêt. Cliquez sur "Simuler une Détection d'Incendie" pour tester la réponse du système.
             </p>
             <div className="mt-3 grid grid-cols-2 gap-2 text-xs text-gray-400">
               <div className="flex items-center">
@@ -157,14 +157,6 @@ const ControlPanel: React.FC = () => {
               <div className="flex items-center">
                 <div className="h-2 w-2 bg-green-500 rounded-full mr-1"></div>
                 <span>Caméras Actives</span>
-              </div>
-              <div className="flex items-center">
-                <div className="h-2 w-2 bg-green-500 rounded-full mr-1"></div>
-                <span>ESSER Connecté</span>
-              </div>
-              <div className="flex items-center">
-                <div className="h-2 w-2 bg-green-500 rounded-full mr-1"></div>
-                <span>MOXA Prêt</span>
               </div>
             </div>
           </div>

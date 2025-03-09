@@ -34,8 +34,11 @@ const generateParkingSpots = (levelId: number): ParkingSpot[] => {
         ? row * spotHeight + 50 
         : row * spotHeight + 50 + aisleWidth;
       
+      // Calculate spot number starting from 1000
+      const spotNumber = 1000 + (levelId * 100) + (row * spotsPerRow) + col;
+      
       spots.push({
-        id: `P${levelId}-R${row}-S${col}`,
+        id: `${spotNumber}`,
         coordinates: { x, y },
         occupied: false,
         angle,
@@ -189,7 +192,7 @@ export const getRandomVehicles = (spotCount: number, occupancyRate: number): Veh
     vehicles.push({
       id: `V-${spotIndex}`,
       type: vehicleTypes[randomInt(0, vehicleTypes.length - 1)],
-      spotId: `P-${spotIndex}`,
+      spotId: `${1000 + spotIndex}`,
       color: getRandomColor(),
     });
   });

@@ -33,7 +33,7 @@ const NotificationPanel: React.FC = () => {
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-semibold text-white flex items-center">
           <Bell className="h-5 w-5 mr-2 text-red-600" />
-          Notifications XCELS
+          Notifications
         </h2>
         <span className="bg-gray-900 text-red-600 text-xs font-medium px-2.5 py-0.5 rounded-full border border-red-900">
           {notifications.length}
@@ -81,7 +81,7 @@ const NotificationPanel: React.FC = () => {
                     </p>
                     
                     {!notification.read && (
-                      <div className="mt-2 flex justify-between items-center">
+                      <div className="mt-2 flex justify-end">
                         <button
                           className="text-xs text-red-600 hover:text-red-500 flex items-center"
                           onClick={() => acknowledgeNotification(notification.id)}
@@ -89,10 +89,6 @@ const NotificationPanel: React.FC = () => {
                           <CheckCircle className="h-3 w-3 mr-1" />
                           Confirmer
                         </button>
-                        
-                        <span className="text-xs text-gray-500">
-                          XCELS-NOTIF-{notification.id.substring(0, 6)}
-                        </span>
                       </div>
                     )}
                   </div>

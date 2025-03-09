@@ -319,16 +319,16 @@ const ParkingVisualization: React.FC = () => {
       if (detector.status === 'fault') {
         detectorColor = '#F59E0B'; // Fault - yellow
       } else if (detector.status === 'active' || detector.id === activeDetector?.id) {
-        detectorColor = '#E11D48'; // Active - red (XCELS red)
+        detectorColor = '#E11D48'; // Active - red
       }
       
       // Highlight hovered detector
       if (detector.id === hoveredDetector) {
-        ctx.shadowColor = 'rgba(225, 29, 72, 0.8)'; // XCELS red glow
+        ctx.shadowColor = 'rgba(225, 29, 72, 0.8)'; // Red glow
         ctx.shadowBlur = 15;
       }
       
-      // Draw detector hexagon (XCELS style)
+      // Draw detector hexagon
       ctx.fillStyle = detectorColor;
       ctx.beginPath();
       for (let i = 0; i < 6; i++) {
@@ -368,7 +368,7 @@ const ParkingVisualization: React.FC = () => {
           return Math.sqrt(dx * dx + dy * dy) < 100;
         });
         
-        ctx.strokeStyle = 'rgba(225, 29, 72, 0.4)'; // XCELS red
+        ctx.strokeStyle = 'rgba(225, 29, 72, 0.4)'; // Red
         ctx.setLineDash([2, 2]);
         nearbySpots.forEach(spot => {
           ctx.beginPath();
@@ -391,15 +391,15 @@ const ParkingVisualization: React.FC = () => {
       ctx.translate(camera.coordinates.x, camera.coordinates.y);
       ctx.rotate((camera.angle * Math.PI) / 180);
       
-      // Draw camera shape (XCELS style)
+      // Draw camera shape
       ctx.fillStyle = '#0F172A';
       ctx.fillRect(-8, -6, 16, 12);
-      ctx.strokeStyle = '#E11D48'; // XCELS red
+      ctx.strokeStyle = '#E11D48'; // Red
       ctx.lineWidth = 1;
       ctx.strokeRect(-8, -6, 16, 12);
       
       // Camera lens
-      ctx.fillStyle = '#E11D48'; // XCELS red
+      ctx.fillStyle = '#E11D48'; // Red
       ctx.beginPath();
       ctx.arc(0, 0, 4, 0, Math.PI * 2);
       ctx.fill();
@@ -412,14 +412,14 @@ const ParkingVisualization: React.FC = () => {
       ctx.fillText(camera.id, 0, -15);
       
       // Draw camera field of view
-      ctx.strokeStyle = 'rgba(225, 29, 72, 0.2)'; // XCELS red
+      ctx.strokeStyle = 'rgba(225, 29, 72, 0.2)'; // Red
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.arc(0, 0, 60, -Math.PI / 4, Math.PI / 4);
       ctx.lineTo(0, 0);
       ctx.stroke();
-      ctx.fillStyle = 'rgba(225, 29, 72, 0.1)'; // XCELS red
+      ctx.fillStyle = 'rgba(225, 29, 72, 0.1)'; // Red
       ctx.fill();
       
       ctx.restore();
@@ -455,7 +455,7 @@ const ParkingVisualization: React.FC = () => {
         case SimulationStep.IVPARK_PROCESSING:
         case SimulationStep.CAMERA_VERIFICATION:
         case SimulationStep.ALARM_CONFIRMED:
-          packetColor = '#E11D48'; // XCELS red
+          packetColor = '#E11D48'; // Red
           break;
       }
       
@@ -503,7 +503,7 @@ const ParkingVisualization: React.FC = () => {
       ctx.arc(canvas.width - 115, 115, 5, 0, Math.PI * 2);
       ctx.fill();
       
-      // XCELS System
+      // IVPARK System
       ctx.fillStyle = '#0F172A';
       ctx.fillRect(canvas.width - 130, 140, 110, 50);
       ctx.strokeStyle = simulationStep >= SimulationStep.IVPARK_PROCESSING ? '#E11D48' : '#334155';
@@ -513,14 +513,14 @@ const ParkingVisualization: React.FC = () => {
       ctx.fillStyle = 'white';
       ctx.font = '12px Arial';
       ctx.textAlign = 'center';
-      ctx.fillText('SYSTÈME XCELS', canvas.width - 75, 160);
+      ctx.fillText('SYSTÈME IVPARK', canvas.width - 75, 160);
       ctx.fillStyle = simulationStep >= SimulationStep.IVPARK_PROCESSING ? '#E11D48' : '#334155';
       ctx.beginPath();
       ctx.arc(canvas.width - 115, 175, 5, 0, Math.PI * 2);
       ctx.fill();
     }
     
-    // Draw XCELS logo watermark
+    // Draw logo watermark
     ctx.save();
     ctx.globalAlpha = 0.05;
     ctx.translate(canvas.width / 2, canvas.height / 2);
@@ -660,7 +660,7 @@ const ParkingVisualization: React.FC = () => {
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-semibold text-white flex items-center">
           <Shield className="h-5 w-5 mr-2 text-red-600" />
-          Surveillance Sécurité - Visualisation Parking
+          Visualisation Parking Q-PARK
         </h2>
         
         <div className="flex space-x-2">
@@ -696,7 +696,7 @@ const ParkingVisualization: React.FC = () => {
           <div className="absolute top-2 left-2 right-2 flex items-center justify-between">
             <div className="bg-black bg-opacity-70 text-white text-xs px-3 py-1 rounded-md flex items-center">
               <AlertTriangle className="h-3 w-3 mr-1 text-red-600" />
-              <span>SURVEILLANCE XCELS SÉCURITÉ ACTIVE</span>
+              <span>SURVEILLANCE ACTIVE</span>
             </div>
             
             <div className="bg-black bg-opacity-70 text-white text-xs px-3 py-1 rounded-md">
@@ -736,7 +736,7 @@ const ParkingVisualization: React.FC = () => {
         )}
         
         <div className="text-xs text-gray-500">
-          XCELS SÉCURITÉ SERVICES - Système de Surveillance v2.1.0
+          XCELS SECURITY SERVICES - Q-PARK
         </div>
       </div>
     </div>

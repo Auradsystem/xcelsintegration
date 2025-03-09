@@ -14,7 +14,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <header className="bg-black text-white shadow-md border-b border-red-600">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            {/* XCELS SECURITY SERVICE Logo */}
+            {/* XCELS SECURITY SERVICES Logo */}
             <div className="flex items-center">
               <div className="relative h-10 w-10 mr-2">
                 <div className="absolute inset-0 bg-red-600 rounded-tl-full rounded-tr-full rounded-br-full transform rotate-45"></div>
@@ -25,11 +25,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               </div>
               <div>
                 <span className="text-xl font-bold tracking-wider">
-                  <span className="text-white">XCEL</span>
-                  <span className="text-red-600">SÉCURITÉ</span>
+                  <span className="text-white">XCELS</span>
+                  <span className="text-red-600">SECURITY</span>
                   <span className="text-white">SERVICES</span>
                 </span>
-                <div className="text-xs text-gray-400">SYSTÈME DE SURVEILLANCE DÉTECTION INCENDIE</div>
+                <div className="text-xs text-gray-400">SYSTÈME DE DÉTECTION INCENDIE</div>
               </div>
             </div>
           </div>
@@ -75,14 +75,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <footer className="bg-black text-gray-400 py-3 border-t border-gray-800">
         <div className="container mx-auto px-4 flex justify-between items-center text-sm">
           <div>
-            <p>© {new Date().getFullYear()} XCELS SÉCURITÉ SERVICES - Système de Détection Incendie Q-PARK</p>
+            <p>© {new Date().getFullYear()} XCELS SECURITY SERVICES - Système de Détection Incendie Q-PARK</p>
           </div>
           <div className="flex items-center space-x-4">
             <span>Version 2.1.0</span>
             <span>|</span>
             <span className="flex items-center">
               <div className="h-2 w-2 bg-green-500 rounded-full mr-2"></div>
-              Tous les Systèmes Opérationnels
+              Connecté à IVPARK GTC
             </span>
           </div>
         </div>

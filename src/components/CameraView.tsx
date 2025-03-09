@@ -56,7 +56,7 @@ const CameraView: React.FC = () => {
       <div className="bg-gray-800 rounded-lg shadow-md p-4 flex-1 border border-gray-700">
         <h2 className="text-xl font-semibold text-white mb-4 flex items-center">
           <Camera className="h-5 w-5 mr-2 text-red-600" />
-          Surveillance Caméra XCELS
+          Surveillance Caméra
         </h2>
         <div className="bg-gray-900 rounded-md h-64 flex items-center justify-center border border-gray-700">
           <div className="text-center text-gray-500">
@@ -74,7 +74,7 @@ const CameraView: React.FC = () => {
       <div className="flex justify-between items-center mb-4">
         <h2 className={`text-xl font-semibold text-white flex items-center`}>
           <Video className="h-5 w-5 mr-2 text-red-600" />
-          Caméra XCELS {activeCamera?.id}
+          Caméra {activeCamera?.id}
         </h2>
         
         <div className="flex items-center space-x-3">
@@ -174,7 +174,7 @@ const CameraView: React.FC = () => {
           </div>
         )}
         
-        {/* XCELS Camera UI overlay */}
+        {/* Camera UI overlay */}
         <div className="absolute inset-0 pointer-events-none">
           {/* Top bar */}
           <div className="absolute top-0 left-0 right-0 p-2 bg-black bg-opacity-70 flex justify-between items-center">
@@ -185,7 +185,7 @@ const CameraView: React.FC = () => {
                 <div className="absolute inset-0.5 bg-black rounded-tl-full rounded-tr-full rounded-br-full transform rotate-45"></div>
               </div>
               <span className="text-white text-xs font-bold">
-                XCELS SÉCURITÉ
+                XCELS SECURITY
               </span>
             </div>
             
@@ -252,7 +252,7 @@ const CameraView: React.FC = () => {
                 <h3 className="text-xl font-bold text-red-600">ALARME INCENDIE</h3>
               </div>
               <p className="text-center">Zone {activeCamera?.zone}</p>
-              <p className="text-center text-sm mt-1">INTERVENTION XCELS SÉCURITÉ INITIÉE</p>
+              <p className="text-center text-sm mt-1">INTERVENTION INITIÉE</p>
             </div>
           </div>
         )}
@@ -272,10 +272,7 @@ const CameraView: React.FC = () => {
           <div className="mt-2 bg-red-900 bg-opacity-30 border border-red-800 rounded p-2">
             <div className="flex items-center text-red-500 font-medium animate-pulse">
               <AlertTriangle className="h-4 w-4 mr-1" />
-              <span>DÉTECTION IA XCELS: Fumée détectée dans l'emplacement {activeDetector?.id.split('-')[1]}</span>
-            </div>
-            <div className="mt-1 text-xs text-gray-400">
-              Confiance: {Math.floor(85 + smokeEffect * 15)}% | Temps de réponse: {(2.5 + smokeEffect * 2).toFixed(1)}s
+              <span>DÉTECTION: Fumée détectée à l'emplacement {activeDetector?.id.split('-')[1]}</span>
             </div>
           </div>
         )}
