@@ -481,7 +481,7 @@ const ParkingVisualization: React.FC = () => {
       ctx.fillStyle = 'white';
       ctx.font = '12px Arial';
       ctx.textAlign = 'center';
-      ctx.fillText('ESSER SYSTEM', canvas.width - 75, 40);
+      ctx.fillText('SYSTÈME ESSER', canvas.width - 75, 40);
       ctx.fillStyle = simulationStep >= SimulationStep.ESSER_PROCESSING ? '#3B82F6' : '#334155';
       ctx.beginPath();
       ctx.arc(canvas.width - 115, 55, 5, 0, Math.PI * 2);
@@ -497,7 +497,7 @@ const ParkingVisualization: React.FC = () => {
       ctx.fillStyle = 'white';
       ctx.font = '12px Arial';
       ctx.textAlign = 'center';
-      ctx.fillText('MOXA SYSTEM', canvas.width - 75, 100);
+      ctx.fillText('SYSTÈME MOXA', canvas.width - 75, 100);
       ctx.fillStyle = simulationStep >= SimulationStep.MOXA_TRANSMISSION ? '#8B5CF6' : '#334155';
       ctx.beginPath();
       ctx.arc(canvas.width - 115, 115, 5, 0, Math.PI * 2);
@@ -513,7 +513,7 @@ const ParkingVisualization: React.FC = () => {
       ctx.fillStyle = 'white';
       ctx.font = '12px Arial';
       ctx.textAlign = 'center';
-      ctx.fillText('XCELS SYSTEM', canvas.width - 75, 160);
+      ctx.fillText('SYSTÈME XCELS', canvas.width - 75, 160);
       ctx.fillStyle = simulationStep >= SimulationStep.IVPARK_PROCESSING ? '#E11D48' : '#334155';
       ctx.beginPath();
       ctx.arc(canvas.width - 115, 175, 5, 0, Math.PI * 2);
@@ -548,7 +548,7 @@ const ParkingVisualization: React.FC = () => {
     ctx.font = 'bold 14px Arial';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText(`LEVEL ${level.name}`, 60, 25);
+    ctx.fillText(`NIVEAU ${level.name}`, 60, 25);
     
     // Draw security status indicator
     ctx.fillStyle = '#0F172A';
@@ -562,7 +562,7 @@ const ParkingVisualization: React.FC = () => {
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(
-      simulationActive ? 'SECURITY ALERT' : 'SECURITY MONITORING',
+      simulationActive ? 'ALERTE SÉCURITÉ' : 'SURVEILLANCE ACTIVE',
       85,
       canvas.height - 25
     );
@@ -660,7 +660,7 @@ const ParkingVisualization: React.FC = () => {
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-semibold text-white flex items-center">
           <Shield className="h-5 w-5 mr-2 text-red-600" />
-          Security Monitoring - Parking Visualization
+          Surveillance Sécurité - Visualisation Parking
         </h2>
         
         <div className="flex space-x-2">
@@ -696,7 +696,7 @@ const ParkingVisualization: React.FC = () => {
           <div className="absolute top-2 left-2 right-2 flex items-center justify-between">
             <div className="bg-black bg-opacity-70 text-white text-xs px-3 py-1 rounded-md flex items-center">
               <AlertTriangle className="h-3 w-3 mr-1 text-red-600" />
-              <span>XCELS SECURITY MONITORING ACTIVE</span>
+              <span>SURVEILLANCE XCELS SÉCURITÉ ACTIVE</span>
             </div>
             
             <div className="bg-black bg-opacity-70 text-white text-xs px-3 py-1 rounded-md">
@@ -710,15 +710,15 @@ const ParkingVisualization: React.FC = () => {
             <div className="bg-black bg-opacity-70 p-2 rounded-md">
               <div className="flex items-center space-x-2 text-sm text-gray-300">
                 <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                <span>Normal detector</span>
+                <span>Détecteur normal</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-gray-300">
                 <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                <span>Fault detector</span>
+                <span>Détecteur en défaut</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-gray-300">
                 <div className="w-3 h-3 rounded-full bg-red-600"></div>
-                <span>Alert detector</span>
+                <span>Détecteur en alerte</span>
               </div>
             </div>
           </div>
@@ -729,14 +729,14 @@ const ParkingVisualization: React.FC = () => {
         {simulationActive ? (
           <p className="flex items-center text-red-500">
             <AlertTriangle className="h-4 w-4 mr-1" />
-            Alert in progress - Level {parkingLevels[currentLevel]?.name} - Zone {activeDetector?.zone}
+            Alerte en cours - Niveau {parkingLevels[currentLevel]?.name} - Zone {activeDetector?.zone}
           </p>
         ) : (
-          <p>Click on a detector to simulate a fire alert</p>
+          <p>Cliquez sur un détecteur pour simuler une alerte incendie</p>
         )}
         
         <div className="text-xs text-gray-500">
-          XCELS SECURITY SERVICES - Monitoring System v2.1.0
+          XCELS SÉCURITÉ SERVICES - Système de Surveillance v2.1.0
         </div>
       </div>
     </div>

@@ -26,10 +26,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <div>
                 <span className="text-xl font-bold tracking-wider">
                   <span className="text-white">XCEL</span>
-                  <span className="text-red-600">SECURITY</span>
+                  <span className="text-red-600">SÉCURITÉ</span>
                   <span className="text-white">SERVICES</span>
                 </span>
-                <div className="text-xs text-gray-400">FIRE DETECTION MONITORING SYSTEM</div>
+                <div className="text-xs text-gray-400">SYSTÈME DE SURVEILLANCE DÉTECTION INCENDIE</div>
               </div>
             </div>
           </div>
@@ -44,7 +44,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             {simulationActive && (
               <div className="flex items-center bg-red-600 px-3 py-1 rounded-full animate-pulse">
                 <AlertTriangle className="h-4 w-4 mr-2" />
-                <span className="text-sm font-medium">ALERT IN PROGRESS</span>
+                <span className="text-sm font-medium">ALERTE EN COURS</span>
               </div>
             )}
             
@@ -62,7 +62,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             
             <div className="flex items-center space-x-2 bg-gray-800 px-3 py-1 rounded-md">
               <Shield className="h-4 w-4 text-green-500" />
-              <span className="text-sm text-green-400">SYSTEM ACTIVE</span>
+              <span className="text-sm text-green-400">SYSTÈME ACTIF</span>
             </div>
           </div>
         </div>
@@ -75,14 +75,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <footer className="bg-black text-gray-400 py-3 border-t border-gray-800">
         <div className="container mx-auto px-4 flex justify-between items-center text-sm">
           <div>
-            <p>© {new Date().getFullYear()} XCELS SECURITY SERVICES - Q-PARK Fire Detection System</p>
+            <p>© {new Date().getFullYear()} XCELS SÉCURITÉ SERVICES - Système de Détection Incendie Q-PARK</p>
           </div>
           <div className="flex items-center space-x-4">
             <span>Version 2.1.0</span>
             <span>|</span>
             <span className="flex items-center">
               <div className="h-2 w-2 bg-green-500 rounded-full mr-2"></div>
-              All Systems Operational
+              Tous les Systèmes Opérationnels
             </span>
           </div>
         </div>

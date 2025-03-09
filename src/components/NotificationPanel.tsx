@@ -33,7 +33,7 @@ const NotificationPanel: React.FC = () => {
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-semibold text-white flex items-center">
           <Bell className="h-5 w-5 mr-2 text-red-600" />
-          XCELS Notifications
+          Notifications XCELS
         </h2>
         <span className="bg-gray-900 text-red-600 text-xs font-medium px-2.5 py-0.5 rounded-full border border-red-900">
           {notifications.length}
@@ -44,7 +44,7 @@ const NotificationPanel: React.FC = () => {
         {notifications.length === 0 ? (
           <div className="text-center text-gray-500 py-8">
             <Shield className="h-8 w-8 mx-auto mb-2 opacity-30" />
-            <p>No notifications</p>
+            <p>Aucune notification</p>
           </div>
         ) : (
           <div className="space-y-3">
@@ -87,7 +87,7 @@ const NotificationPanel: React.FC = () => {
                           onClick={() => acknowledgeNotification(notification.id)}
                         >
                           <CheckCircle className="h-3 w-3 mr-1" />
-                          Acknowledge
+                          Confirmer
                         </button>
                         
                         <span className="text-xs text-gray-500">
